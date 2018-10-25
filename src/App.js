@@ -1,6 +1,15 @@
-import React, { Component } from "react";
-import "./App.css";
-import DOCUMENT from "./DOCUMENT";
+import React, { Component } from 'react';
+import './App.css';
+import DOCUMENT from './DOCUMENT';
+import DocumentRenderer from './DocumentRenderer';
+
+// This would be user provided
+const NODE_RENDERERS = {
+  document: props => <div className="document">{props.children}</div>,
+  heading1: 'h1',
+  paragraph: 'p',
+  quote: 'blockquote'
+};
 
 class App extends Component {
   render() {
@@ -8,8 +17,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <p>Render the document here</p>
-        <pre>{JSON.stringify(document, null, 2)}</pre>
+        <DocumentRenderer document={document} nodeRenderers={NODE_RENDERERS} />
       </div>
     );
   }
